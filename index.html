@@ -1,0 +1,246 @@
+<html ng-app="app" ng-controller="BaseController">
+
+    <head>
+        <link href="css/cssFile.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/master/angular-material.css">
+    </head>
+
+    
+    <body>
+    
+        <md-content layout-fill>
+            <md-toolbar>
+              <div class="md-toolbar-tools">
+                  <md-button ng-show="{{showTabBar}}" class="md-icon-button" aria-label="More" ng-click="onTabSelected('home')">
+                  <md-icon md-svg-icon="img/ic_home_white-toolbar.svg"></md-icon>
+                </md-button>
+                <h4>
+                  <span>WELCOME {{eventName}}</span>
+                </h4>
+                <span flex></span>
+                  
+                  
+                  <md-menu md-position-mode="target-right target" >
+                      <md-button aria-label="Settings" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                        <md-icon md-menu-origin md-svg-icon="img/ic_settings_white_24px.svg"></md-icon>
+                      </md-button>
+                      <md-menu-content width="4" >
+                        <md-menu-item>
+                          <md-button ng-click="ctrl.announceClick($index)">
+                              <div layout="row">
+                                <p flex>Account Details</p>
+                                <md-icon md-menu-align-target md-svg-icon="img/ic_supervisor_account_black_18px.svg" style="margin: auto 3px auto 0;"></md-icon>
+                              </div>
+                          </md-button>
+                          </md-menu-item>
+                                <md-menu-item>
+                            <md-button ng-click="ctrl.announceClick($index)">
+                              <div layout="row">
+                                <p flex>Support</p>
+                                <md-icon md-menu-align-target md-svg-icon="img/ic_local_phone_black_24px.svg" style="margin: auto 3px auto 0;"></md-icon>
+                              </div>
+                          </md-button>
+                                    </md-menu-item>
+                          <md-menu-item>
+                            <md-button ng-click="ctrl.announceClick($index)">
+                              <div layout="row">
+                                <p flex>Logout</p>
+                                <md-icon md-menu-align-target md-svg-icon="img/ic_power_settings_new_black_24px.svg" style="margin: auto 3px auto 0;"></md-icon>
+                              </div>
+                          </md-button>
+                        </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                  
+                  
+                <md-button class="md-icon-button" aria-label="More" ng-click="toggleInfoDrawer()">
+                  <md-icon md-svg-icon="img/ic_info_white_24px.svg"></md-icon>
+                </md-button>
+              </div>
+            </md-toolbar>
+            <md-tabs ng-show="{{showTabBar}}" class="md-primary" md-selected="data.selectedIndex" md-align-tabs="top" md-dynamic-height="true" md-center-tabs="true" style="text-align: center;">
+                <md-tab label="Events" md-on-select="onTabSelected('events')">
+                        <md-tab-label style="text-color: white;">Events</md-tab-label>
+                </md-tab>
+                <md-tab label="Pronites" md-on-select="onTabSelected('pronites')">
+                        <md-tab-label>Pronites</md-tab-label>
+                </md-tab>
+                <md-tab label="Schedule" md-on-select="onTabSelected('schedule')">
+                        <md-tab-label>Schedule</md-tab-label>
+                </md-tab>
+                <md-tab label="Sponsors" md-on-select="onTabSelected('sponsors')">
+                        <md-tab-label>Sponsors</md-tab-label>
+                </md-tab>
+                <md-tab label="Contacts" md-on-select="onTabSelected('contacts')">
+                        <md-tab-label>Contacts</md-tab-label>
+                </md-tab>
+                <md-tab label="About" md-on-select="onTabSelected('about')">
+                        <md-tab-label>About</md-tab-label>
+                </md-tab>
+                <md-tab label="Notifications" md-on-select="onTabSelected('notifications')">
+                        <md-tab-label>Notifications</md-tab-label>
+                </md-tab>
+                <md-tab label="Results" md-on-select="onTabSelected('results')">
+                        <md-tab-label>Results</md-tab-label>
+                </md-tab>
+                <md-tab label="Gallery" md-on-select="onTabSelected('gallery')">
+                        <md-tab-label>Gallery</md-tab-label>
+                </md-tab>
+            </md-tabs>
+
+             <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="info_drawer">
+                <md-toolbar class="md-theme-dark">
+                    <div class="md-toolbar-tools">
+                    <h5>
+                      <span>Help</span>
+                        </h5>
+                        <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Close" ng-click="toggleInfoDrawer()">
+                      <md-icon md-svg-icon="img/ic_close_white_32px.svg"></md-icon>
+                    </md-button>
+                    </div>
+                </md-toolbar>
+                <md-content ng-controller="InfoDrawerController" layout="column" flex layout-fill ng-cloak>
+                    
+                    <!-- Events -->
+                    <section>
+                      <md-subheader class="md-secondary"><u>Events</u></md-subheader>
+                      <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="eventQuestion in eventsQuestions" ng-click="clickedInfoItem($event,eventQuestion)">
+                            <p>{{eventQuestion.question}}</p>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                      </md-list>
+                    </section>
+                    
+                     <!-- Pronites -->
+                    <section>
+                      <md-subheader class="md-secondary"><u>Pronites</u></md-subheader>
+                      <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="eventQuestion in pronitesQuestions" ng-click="clickedInfoItem($event,eventQuestion)">
+                            <p>{{eventQuestion.question}}</p>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                      </md-list>
+                    </section>
+                    
+                    <!-- Schedule -->
+                    <section>
+                      <md-subheader class="md-secondary"><u>Schedule</u></md-subheader>
+                      <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="eventQuestion in scheduleQuestions" ng-click="clickedInfoItem($event,eventQuestion)">
+                            <p>{{eventQuestion.question}}</p>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                      </md-list>
+                    </section>
+                    
+                    <!-- Sponsors -->
+                    <section>
+                      <md-subheader class="md-secondary"><u>Sponsors</u></md-subheader>
+                      <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="eventQuestion in sponsorsQuestions" ng-click="clickedInfoItem($event,eventQuestion)">
+                            <p>{{eventQuestion.question}}</p>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                      </md-list>
+                    </section>
+                    
+                    <!-- Contacts -->
+                    <section>
+                      <md-subheader class="md-secondary"><u>Contacts</u></md-subheader>
+                      <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="eventQuestion in contactsQuestions" ng-click="clickedInfoItem($event,eventQuestion)">
+                            <p>{{eventQuestion.question}}</p>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                      </md-list>
+                    </section>
+                    
+                    <!-- About -->
+                    <section>
+                      <md-subheader class="md-secondary"><u>About</u></md-subheader>
+                      <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="eventQuestion in aboutQuestions" ng-click="clickedInfoItem($event,eventQuestion)">
+                            <p>{{eventQuestion.question}}</p>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                      </md-list>
+                    </section>
+                    
+                    <!-- Notifications -->
+                    <section>
+                      <md-subheader class="md-secondary"><u>Notifications</u></md-subheader>
+                      <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="eventQuestion in notificationsQuestions" ng-click="clickedInfoItem($event,eventQuestion)">
+                            <p>{{eventQuestion.question}}</p>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                      </md-list>
+                    </section>
+                    
+                    <!-- Results -->
+                    <section>
+                      <md-subheader class="md-secondary"><u>Results</u></md-subheader>
+                      <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="eventQuestion in resultsQuestions" ng-click="clickedInfoItem($event,eventQuestion)">
+                              <p>{{eventQuestion.question}}</p>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                      </md-list>
+                    </section>
+                    
+                    <!-- Gallery -->
+                    <section>
+                      <md-subheader class="md-secondary"><u>Gallery</u></md-subheader>
+                      <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="eventQuestion in galleryQuestions" ng-click="clickedInfoItem($event,eventQuestion)">
+                            <p>{{eventQuestion.question}}</p>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                      </md-list>
+                    </section>
+                    
+                    
+                </md-content>
+                 
+            </md-sidenav>
+            
+        <ng-view>
+        </ng-view>
+        
+        </md-content>
+            
+        
+    
+            
+        
+        <!-- JS Library Dependencies -->
+        
+        <!-- Angular Material Dependencies -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="js/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+        
+        <!-- Angular Routing Controllers -->
+        <script src="module/app/appController.js"></script>
+        <script src="module/app/controller/BaseController.js"></script>
+        <script src="module/app/controller/InfoDrawerController.js"></script>
+        <script src="module/app/controller/HomeController.js"></script>
+        <script src="module/app/controller/SponsorsController.js"></script>
+        <script src="module/app/controller/ScheduleController.js"></script>
+        <script src="module/app/controller/ContactsController.js"></script>
+        <script src="module/app/controller/ResultsController.js"></script>
+        <script src="module/app/controller/PronitesController.js"></script>
+        <script src="module/app/controller/NotificationsController.js"></script>
+        <script src="module/app/controller/GalleryController.js"></script>
+        <script src="module/app/controller/EventsController.js"></script>
+        <script src="module/app/controller/AboutController.js"></script>
+        <script src="module/app/route/route.js"></script>
+        <script src="module/fact/HttpTestModule.js"></script>
+    </body>
+    
+</html>
